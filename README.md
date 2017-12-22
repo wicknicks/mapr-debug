@@ -1,9 +1,9 @@
 # mapr-debug
 
-Run this code with the command: 
+Run this code with the command (if you are using linux, please change -macosx prefix for the maprfs jar in the classpath to -linux): 
 
 ```
-$ java -Dshimloader.debuglog=yes -classpath out/production/mapr-jar/:maprfs-5.2.1-mapr.jar io.wicknicks.Main
+$ java -Dshimloader.debuglog=yes -classpath out/production/mapr-jar/:maprfs-5.2.1-mapr-macosx.jar io.wicknicks.Main
 ```
 
 Response:
@@ -32,7 +32,7 @@ Exception in thread "main" java.lang.UnsatisfiedLinkError: com.mapr.fs.jni.MapRC
 The exception is the same as what we saw with the connect setup. Now, let's run the same command with the additional flag: 
 
 ```
-java -Dshimloader.debuglog=yes -Dmapr.library.flatclass=true -classpath out/production/mapr-jar/:maprfs-5.2.1-mapr.jar io.wicknicks.Main
+java -Dshimloader.debuglog=yes -Dmapr.library.flatclass=true -classpath out/production/mapr-jar/:maprfs-5.2.1-mapr-macosx.jar io.wicknicks.Main
 ```
 
 Response

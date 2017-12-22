@@ -1,5 +1,7 @@
 # mapr-debug
 
+This code simply tries to invoke the `MapRClient.initSpoofedUser` in a [simple Java class](https://github.com/wicknicks/mapr-debug/blob/master/src/io/wicknicks/Main.java). This invocation will only work if we have loaded the libMapRClient.so (in linux or .dylib in MacOSX) correctly. 
+
 Run this code with the command (if you are using linux, please change -macosx prefix for the maprfs jar in the classpath to -linux): 
 
 ```
@@ -51,3 +53,8 @@ com.mapr.fs.jni.MapRClient
 ```
 
 No exception, and the code runs this call to [MapRClient.initSpoofedUser](https://github.com/wicknicks/mapr-debug/blob/master/src/io/wicknicks/Main.java#L15) correctly.
+
+Conclusion
+----------
+
+It looks like the ShimLoader.load method uses the `mapr.library.flatclass` property to decide which classloader to load the `.so` file with. If this flag is not provided, it uses one associated with the ShimLoader, otherwise uses the root classloader. This causes problems when the application thread tries to invoke native methods. Providing the property (with any value), uses the same classloader throughout.
